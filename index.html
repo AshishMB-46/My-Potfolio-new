@@ -3,6 +3,22 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script>
+(function () {
+  var url = new URL(window.location.href);
+  var changed = false;
+  ["utm_source", "source"].forEach(function (key) {
+    if ((url.searchParams.get(key) || "").toLowerCase().includes("chatgpt")) {
+      url.searchParams.delete(key);
+      changed = true;
+    }
+  });
+  if (changed) {
+    var cleanUrl = url.pathname + (url.searchParams.toString() ? "?" + url.searchParams.toString() : "") + url.hash;
+    window.history.replaceState({}, document.title, cleanUrl);
+  }
+})();
+</script>
 <title>Ashish Mathew Baby | Cloud Computing Portfolio</title>
 <meta name="description" content="Portfolio of Ashish Mathew Baby, MSc Cloud Computing student at the University of East London with Computer Science and full stack development experience.">
 <meta property="og:title" content="Ashish Mathew Baby | Cloud Computing Portfolio">
